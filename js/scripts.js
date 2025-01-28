@@ -254,21 +254,24 @@ document.addEventListener("DOMContentLoaded", function () {
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
+                let delay = entry.target.dataset.delay || 0; // Use delay from HTML, default to 0ms
+
                 if (entry.target.classList.contains("slide-up")) {
-                    entry.target.style.animation = "slideInUp 0.8s ease-out forwards";
+                    entry.target.style.animation = `slideInUp 1s cubic-bezier(.06,.47,.08,.99) ${delay}ms forwards`;
                 } else if (entry.target.classList.contains("slide-left")) {
-                    entry.target.style.animation = "slideInLeft 0.8s ease-out forwards";
+                    entry.target.style.animation = `slideInLeft 1s cubic-bezier(.06,.47,.08,.99) ${delay}ms forwards`;
                 } else if (entry.target.classList.contains("slide-right")) {
-                    entry.target.style.animation = "slideInRight 0.8s ease-out forwards";
+                    entry.target.style.animation = `slideInRight 1s cubic-bezier(.06,.47,.08,.99) ${delay}ms forwards`;
                 }
 
-                observer.unobserve(entry.target); // Only animate once
+                observer.unobserve(entry.target); // Prevent re-triggering animation
             }
         });
-    }, { threshold: 0.3 });
+    }, { threshold: 0.15 });
 
     animatedElements.forEach(element => observer.observe(element));
 });
+
 
 
 
