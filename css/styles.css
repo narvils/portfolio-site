@@ -123,6 +123,8 @@ footer {
 }
 
 .portfolio-item {
+    opacity: 1;
+    transform: translateY(0);
     flex: 0 1 auto;
     width: 100%;
 }
