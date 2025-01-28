@@ -11,9 +11,15 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;600&display=swap" as="style">
+
+    <link rel="preload" href="1.webp" as="image" type="image/webp">
+    <link rel="preload" href="2.webp" as="image" type="image/webp">
 
     <link rel="stylesheet" href="../../css/styles.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="https://unpkg.com/photoswipe/dist/photoswipe-lightbox.esm.js"></script>
 
     <link rel="stylesheet" href="https://unpkg.com/photoswipe@5.2.2/dist/photoswipe.css">
 
@@ -145,8 +151,6 @@
             </div>
         </footer>
 
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script src="https://unpkg.com/photoswipe/dist/photoswipe-lightbox.esm.js"></script>
     <script src="../../js/scripts.js"></script>
     <script>
         AOS.init({
@@ -155,6 +159,7 @@
             once: true, // Animation runs only once
             offset: 80, // Offset (in px) before the animation starts
             delay: 0, // Delay before animation starts
+            startEvent: 'DOMContentLoaded',
         });
     </script>
     <script type="module">
