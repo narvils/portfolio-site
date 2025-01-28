@@ -1,0 +1,1193 @@
+:root {
+    --color-black: #131314;
+    --color-dark-gray: #4B4F54;
+    --color-medium-gray: #66686B;
+    --color-light-gray: #ADB1B8;
+    --color-off-white: #E9ECF0;
+    --color-white: #FFFFFF;
+    --font-family: 'Outfit', sans-serif;
+    --transition-default: 0.3s ease-in-out;
+    --padding-container: 0 80px;
+}
+
+body {
+    font-family: var(--font-family);
+    color: var(--color-black);
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+
+img, video {
+    max-width: 100%;
+    height: auto;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;  /* Centers the content */
+    padding: 0 80px; /* Adds spacing on smaller screens */
+}
+
+header {
+    position: relative;
+    width: 100%;
+    padding: 60px 0;
+    background: var(--color-white);
+}
+
+header.sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 20px 0;  /* Reduced padding */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+    z-index: 1000;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--color-black);
+}
+
+.nav-links {
+    display: flex;
+    gap: 60px;
+}
+
+.nav-item {
+    text-decoration: none;
+    font-size: 16px;
+    color: var(--color-dark-gray);
+    transition: color 0.3s ease, opacity 0.3s ease;
+    position: relative;
+}
+
+.nav-item::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--color-light-gray);
+    transform: scaleX(0);  /* Initially hidden */
+    transform-origin: center;  /* Scale from the center */
+    transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* On hover, reveal the underline smoothly */
+.nav-item:hover::after {
+    transform: scaleX(1);
+}
+
+footer {
+    padding: 80px 0;
+    background: var(--color-black);
+    color: var(--color-white);
+    height: calc(100vh - 160px);
+    z-index: 1001;
+}
+
+/* Portfolio Grid Layout using Flexbox */
+
+.portfolio-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 120px;
+    justify-content: center;
+    margin-bottom: 80px;
+}
+
+.portfolio-item {
+    flex: 0 1 auto;
+    width: 100%;
+}
+
+.portfolio-item.large { max-width: 1400px; }
+.portfolio-item.medium { max-width: 800px; }
+.portfolio-item.half { max-width: 600px; }
+.portfolio-item.small { max-width: 400px; }
+
+@media (max-width: 1480px) {
+    .portfolio-grid {
+        flex-wrap: wrap;
+        gap: 80px;
+    }
+
+    .portfolio-item.large { max-width: 1400px; }
+    .portfolio-item.medium,
+    .portfolio-item.half,
+    .portfolio-item.small {
+        max-width: calc(50% - 40px); /* Two-column layout with gap adjustment */
+    }
+
+    .portfolio-item.medium .thumbnail,
+    .portfolio-item.half .thumbnail,
+    .portfolio-item.small .thumbnail {
+        height: auto;
+        aspect-ratio: 1 / 1; /* Makes them squares */
+    }
+
+}
+
+@media (max-width: 1024px) {
+    .portfolio-grid {
+        flex-wrap: wrap;
+        gap: 40px;
+    }
+
+    .portfolio-item.large { max-width: 1400px; }
+    .portfolio-item.medium,
+    .portfolio-item.half,
+    .portfolio-item.small {
+        max-width: calc(50% - 20px); /* Two-column layout with gap adjustment */
+    }
+
+    .portfolio-item.medium .thumbnail,
+    .portfolio-item.half .thumbnail,
+    .portfolio-item.small .thumbnail {
+        height: auto;
+        aspect-ratio: 1 / 1; /* Makes them squares */
+    }
+
+}
+
+.thumbnail-link {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+}
+
+/* Thumbnail Styling */
+.thumbnail {
+    position: relative;
+    width: 100%;
+    height: 600px;
+    overflow: hidden; /* Ensure no overflow when scaling */
+}
+
+.overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+}
+
+/* Use a pseudo-element to handle background scaling */
+.thumbnail::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: inherit;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: transform 0.3s ease-out;
+}
+
+/* Hover effect to scale background image */
+.thumbnail:hover::before {
+    transform: scale(1.1);
+}
+
+.thumbnail:hover .overlay {
+    opacity: 1;
+}
+
+.portfolio-info {
+    display: flex;
+    align-items: flex-start;
+    padding-top: 24px;
+    gap: 10px;  /* Ensures spacing between title and description */
+}
+
+.portfolio-info .title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-black);
+    margin: 0;
+    flex: 1;  /* Takes 1 fraction of space */
+    max-width: 33%;
+}
+
+.portfolio-info .description {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--color-dark-gray);
+    margin: 0;
+    flex: 2;  /* Takes 2 fractions of space */
+    max-width: 66%;
+    text-align: right;
+}
+
+/* Responsive adjustments below 768px */
+@media (max-width: 768px) {
+
+    header {
+        position: relative;
+        width: 100%;
+        padding: 40px 0;
+    }
+
+    .logo {
+        font-size: 16px;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 32px;
+    }
+
+    .nav-item {
+        font-size: 14px;
+    }
+
+    .container {
+        padding: 0 40px;
+    }
+
+    .portfolio-grid {
+        flex-direction: column; /* Stack vertically */
+        gap: 40px; /* Reduced gap for smaller screens */
+    }
+
+    .portfolio-item {
+        flex: 0 1 100%;
+        width: 100%;
+    }
+
+    .portfolio-item.large { max-width: 1200px; }
+    .portfolio-item.medium { max-width: 800px; }
+    .portfolio-item.half { max-width: 800px; }
+    .portfolio-item.small { max-width: 800px; }
+
+    .thumbnail {
+        height: auto;
+        width: 100%;
+        aspect-ratio: 1 / 1; /* Make square thumbnails */
+    }
+
+    .portfolio-info {
+        padding: 12px 0;
+    }
+}
+
+/* Additional adjustments for smaller screens */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 20px;
+    }
+
+    header {
+        padding: 20px 0;
+    }
+
+    header.sticky {
+        padding: 12px 0;  /* Reduced padding */
+    }
+
+    .logo {
+        font-size: 14px;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 20px;
+    }
+
+    .nav-item {
+        font-size: 12px;
+    }
+
+    .portfolio-grid {
+        gap: 20px;
+    }
+
+    .portfolio-info {
+        flex-direction: column;
+        align-items: flex-start;  /* Stack text vertically on smaller screens */
+        gap: 6px;
+        padding: 12px 0;
+    }
+
+    .portfolio-info .title, 
+    .portfolio-info .description {
+        max-width: 100%;
+        flex: none;  /* Remove flex properties for stacked layout */
+        text-align: left;
+    }
+}
+
+/*-------------------------------- Project Page --------------------------------*/
+
+/* Project Info Section */
+.project-info {
+    padding: 80px 0;
+    padding-bottom: 0;
+}
+
+.project-info .container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: stretch; /* Ensure both columns are the same height */
+}
+
+.project-details {
+    flex: 1 1 calc(50% - 10px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Push title to top and role to bottom */
+}
+
+.project-description {
+    flex: 1 1 calc(50% - 10px);
+}
+
+/* Project Details Styling */
+.project-details h1 {
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--color-black);
+    margin: 0;
+}
+
+.project-details h4 {
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--color-dark-gray);
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: block;
+}
+
+ul li {
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--color-medium-gray);
+    line-height: 2;
+}
+
+.services {
+    align-items: flex-start;
+}
+
+.services h1 {
+    font-weight: 200;
+    margin-top: 60px;
+}
+
+.services ul li, .services p {
+    line-height: 36px;
+    font-size: 18px;
+    color: var(--color-dark-gray);
+    font-weight: 300;
+}
+
+.services-list ul {
+    width: calc(100% - 20px);
+    flex: 1;
+}
+
+.services-list {
+    display: flex;
+    gap: 40px; /* Space between columns */
+    flex-wrap: wrap;
+}
+
+/* Project Description Styling */
+.project-description p {
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--color-dark-gray);
+    line-height: 2;
+    margin: 0;
+}
+
+/* Responsive Design for Project Info */
+@media (max-width: 768px) {
+    .project-info .container {
+        flex-direction: column;
+    }
+
+    .project-details, 
+    .project-description {
+        flex: 1 1 100%;
+    }
+
+    /* Make the list items display in a single row */
+    .project-role ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px; /* Add spacing between items */
+    }
+
+    .project-role ul li {
+        margin-bottom: 0; /* Remove bottom margin for single row layout */
+    }
+}
+
+/*-------------------------------- Project Images --------------------------------*/
+
+/* Project Grid Section */
+.project-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 80px 0;
+}
+
+/* Full-width image/video */
+.project-grid .full-width {
+    width: 100%;
+    height: auto;
+}
+
+.spacer {
+    width: 100%;
+    min-height: 80px;
+}
+
+.spacer.large {
+    min-height: 20vh;
+}
+
+/* Half-width images/videos */
+.project-grid .half {
+    width: calc(50% - 10px);
+    height: auto;
+}
+
+/* Stacked column - ensures two rows inside one half */
+.project-grid .half.stack {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;  /* Spacing between stacked rows */
+    width: calc(50% - 10px); /* Match half layout */
+}
+
+.stack .half {
+    width: 100%;
+    height: auto;
+    object-fit: cover;  /* Ensures images maintain aspect ratio */
+}
+
+/* Target the single image next to the stack */
+.project-grid .half.match-height {
+    display: flex; /* Make it a flex container */
+    flex-direction: column; /* Ensure child (img) fills the height */
+}
+
+.project-grid .half.match-height img {
+    flex: 1; /* Allow the image to stretch to fill the container height */
+    object-fit: cover; /* Maintain aspect ratio and fill available space */
+}
+
+.project-grid .full-width.thirds {
+    display: flex;
+    gap: 20px;  /* Ensure 20px gap between images */
+    align-items: stretch;  /* Stretch both images to the same height */
+}
+
+.project-grid .full-width.thirds img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Maintain aspect ratio without distortion */
+}
+
+.project-grid .thirds .vertical {
+    width: auto; /* Let it adjust naturally */
+    flex: 1; /* Takes up space proportionally */
+}
+
+.project-grid .thirds .horizontal {
+    flex: 2; /* Takes up double space relative to the vertical image */
+}
+
+/* Wrapper for the slider inside a stack */
+.stacked-slider-container {
+    display: flex;
+    flex-direction: column; /* Align items vertically if necessary */
+    justify-content: center; /* Center content within the container */
+    align-items: stretch; /* Ensure content stretches to fill the height */
+    aspect-ratio: 3 / 2; /* Enforce a consistent 3:2 aspect ratio */
+    height: auto; /* Allow the container height to follow the content */
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .project-grid .full-width.thirds {
+        flex-direction: column;
+    }
+}
+
+.project-grid .text-section {
+    width: calc(50% - 90px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: flex-start; 
+    padding: 80px 80px 80px 0;
+}
+
+.project-grid .full-width.text-section {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start; 
+    padding: 80px 0;
+    gap: 20px;
+}
+
+.text-section.right {
+    padding: 80px 0 80px 80px;
+}
+
+.project-grid .text-section p {
+    font-size: 18px;
+    line-height: 2em;
+    font-weight: 300;
+    color: var(--color-dark-gray);
+    margin: 10px 0;
+}
+
+.project-grid .text-section h2 {
+    font-size: 24px;
+}
+
+.project-grid .text-section h1 {
+    font-size: 40px;
+}
+
+/* Image/Video Styling */
+.project-grid img, 
+.project-grid video {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+}
+
+/* Responsive Design for Project Grid */
+@media (max-width: 1024px) {
+    .project-grid .half, .project-grid .half.text-section, .project-grid .half.stack {
+        width: 100%; /* Stack items in a single column */
+    } 
+
+    .project-grid .full-width.text-section {
+        flex-direction: column;
+        padding: 20px 0;
+    }
+
+    .half.text-section, .text-section.right{
+        padding: 20px 0;
+    }
+
+    h2.half, h1.half {
+        margin-bottom: 0;
+    }
+
+    .bb-video-wrap {
+        aspect-ratio: 4 / 5;
+    }
+
+    .spacer {
+        display: none;
+    }
+
+    .project-grid {
+        padding: 20px 0;
+    }
+}
+
+.bb-video-wrap {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #0a0e11;
+}
+
+.bb-video-wrap video {
+    top: 50%;
+    position: relative;
+    width: 50%;
+    height: auto;
+    left: 25%;
+    transform: translateY(-50%);
+}
+
+/*-------------------------------- Carousel --------------------------------*/
+
+/* Carousel Container */
+.carousel-container {
+    position: relative;
+    width: 100%;
+    height: 620px; /* Full width and 620px height */
+    overflow: hidden;
+    background-color: #161C24; /* Dark background color */
+    display: flex;
+    align-items: center;
+}
+
+.carousel-container.stat-track {
+    width: 100%;  /* Ensures full width */
+    aspect-ratio: 3 / 2;  /* Maintains 3:2 aspect ratio */
+    background-color: #2A2E31; /* Dark background color */
+    height: auto;
+}
+
+.carousel-container.tech-insights {
+    background-color: #0E1112; /* Dark background color */
+    width: 100%;  /* Ensures full width */
+    aspect-ratio: 3 / 2;  /* Maintains 3:2 aspect ratio */
+    height: auto;
+}
+
+.carousel-container.mindful {
+    width: 100%;  /* Ensures full width */
+    aspect-ratio: 3 / 2;  /* Maintains 3:2 aspect ratio */
+    background-color: #e9ecf0; /* Dark background color */
+    height: auto;
+}
+
+.carousel-container.mindful .vertical-carousel-container {
+    transform: rotate(0); 
+    width: 110%;
+    left: -5%;
+}
+
+@media (max-width: 1024px) {
+    .carousel-container.stat-track {
+        aspect-ratio: 1 / 1;  /* Maintains 3:2 aspect ratio */
+    }
+}
+
+/* Track Styling */
+.carousel-track {
+    display: flex;
+    gap: 40px; /* Space between images */
+    width: max-content; /* Allow items to scroll endlessly */
+    transform: translateX(0);
+    white-space: nowrap; /* Prevent line breaks */
+}
+
+/* Image Styling */
+.carousel-track img {
+    height: 400px; /* Fixed image height */
+    width: auto; /* Maintain aspect ratio */
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.vertical-carousel-container {
+    display: flex;
+    gap: 3vw;  /* Increase space between columns */
+    position: absolute;
+    width: 150%;  /* Make it wider to extend outside parent bounds */
+    height: 150%; /* Increase height to allow overflow */
+    transform: rotate(-15deg); /* Rotate container */
+    left: -25%;
+}
+
+.vertical-carousel-track {
+    display: flex;
+    flex-direction: column;
+    gap: 3vw; /* Adjust spacing between images */
+    position: relative;
+    animation-timing-function: linear;
+}
+
+.vertical-carousel-track img {
+    width: 100%;
+    max-width: 1200px;  /* Increase image size */
+    height: auto;
+    object-fit: cover;
+    box-shadow: 0 24px 48px 0 rgba(0, 0, 0, 0.2);
+}
+
+/*-------------------------------- Gallery --------------------------------*/
+
+#my-gallery {
+    position: relative;
+    margin: 80px 0;
+}
+
+#my-gallery a {
+    display: block;
+    position: absolute;
+    transition: all 0.3s ease-in-out;
+}
+
+#my-gallery img {
+    max-width: 100%;
+    display: block;
+}
+
+/* Image slider container (stacking images) */
+.image-slider {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* Full width of the container */
+    height: 100%; /* Full height of the container */
+    background-size: cover;
+    background-position: center;
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.5s ease-in-out; /* Smooth fade */
+}
+
+/* Clipping animation effect */
+.slide.revealing {
+    transition: clip-path 0.5s cubic-bezier(0.44, 0, 0.56, 1);
+    clip-path: inset(0 100% 0 0);
+}
+
+/*-------------------------------- Portfolio Covers --------------------------------*/
+
+/* Positioning the SVG logo in the center */
+.thumbnail-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Video container */
+.thumbnail-videos {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;  
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+}
+
+/* Centering only for the 'side' instance */
+.mockup-video.side {
+    position: absolute;
+    left: 80px;
+    top: 25%;
+    width: 720px !important;
+    height: 50%;
+    border-radius: 10px;
+    transform: translateX(310px); /* Center vertically only for this instance */
+    z-index: 2;
+    opacity: 0;
+}
+
+/* Ensure video takes full width inside container */
+.mockup-video.side video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/*-------------------------------- Trim --------------------------------*/
+
+.mockup-video.left {
+    position: absolute;
+    left: calc(50% - (364px / 2) - 243px);
+    top: 160px;  /* Position from top */
+    width: 243px;
+    height: auto;
+    border-radius: 40px;
+    transform: translateX(310px); /* Start offset for entrance animation */
+    z-index: 2;
+    opacity: 0;
+}
+
+.mockup-video.front {
+    position: absolute;
+    left: 50%;
+    top: 200%; /* Start far down for entrance animation */
+    transform: translateX(-50%);
+    width: 284px;
+    height: auto;
+    border-radius: 52px;
+    z-index: 3;
+}
+
+.mockup-video.front.screen {
+    border-radius: 40px;
+}
+
+.thumbnail:hover .mockup-video.front.screen {
+    animation: slide-up-center 0.5s cubic-bezier(0.1, 0.75, 0.32, 0.99) forwards;
+}
+
+.mockup-video.right {
+    position: absolute;
+    left: calc(50% + (364px / 2));
+    top: 160px;  /* Position from top */
+    width: 243px;
+    height: auto;
+    border-radius: 40px;
+    transform: translateX(-310px); /* Start offset for entrance animation */
+    z-index: 2;
+    opacity: 0;
+}
+
+/* Hover effect - entrance animations */
+.thumbnail:hover .thumbnail-logo {
+    opacity: 0;
+}
+
+.thumbnail:hover .thumbnail-videos {
+    opacity: 1;
+    visibility: visible;
+}
+
+.thumbnail:hover .mockup-video.front {
+    animation: slide-up-center 0.2s cubic-bezier(0.44, 0, 0.56, 1) forwards;
+}
+
+.thumbnail:hover .mockup-video.left {
+    animation: slide-in-left 0.8s cubic-bezier(0.12, 0.86, 0.56, 1) 0.2s forwards;
+}
+
+.thumbnail:hover .mockup-video.right {
+    animation: slide-in-right 0.8s cubic-bezier(0.12, 0.86, 0.56, 1) 0.2s forwards;
+}
+
+.thumbnail:hover .mockup-video.side {
+    animation: slide-in-left 0.4s cubic-bezier(0.44, 0, 0.56, 1) forwards;
+}
+
+/* Exit animations */
+.thumbnail:not(:hover) .mockup-video.front {
+    animation: slide-out-center 0.4s cubic-bezier(0.44, 0, 0.56, 1) forwards;
+}
+
+.thumbnail:not(:hover) .mockup-video.left {
+    animation: slide-out-left 0.4s cubic-bezier(0.12, 0.86, 0.56, 1) forwards;
+}
+
+.thumbnail:not(:hover) .mockup-video.right {
+    animation: slide-out-right 0.4s cubic-bezier(0.12, 0.86, 0.56, 1) forwards;
+}
+
+.thumbnail:not(:hover) .mockup-video.side {
+    animation: slide-out-side 0.4s cubic-bezier(0.12, 0.86, 0.56, 1) forwards;
+}
+
+/* Keyframes for entrance animations */
+@keyframes slide-up-center {
+    from {
+        top: 200%;
+    }
+    to {
+        top: 80px;
+    }
+}
+
+@keyframes slide-in-left {
+    from {
+        transform: translateX(310px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slide-in-right {
+    from {
+        transform: translateX(-310px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Keyframes for exit animations */
+@keyframes slide-out-center {
+    from {
+        top: 80px;
+    }
+    to {
+        top: 100%;
+    }
+}
+
+@keyframes slide-out-left {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(400px);
+        opacity: 1;
+    }
+}
+
+@keyframes slide-out-right {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(400px);
+        opacity: 1;
+    }
+}
+
+@keyframes slide-out-side {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(720px);
+        opacity: 1;
+    }
+}
+
+.mockup-video {
+    mix-blend-mode: screen;
+}
+
+@media (max-width: 1024px) { /* Adjust this value to your preferred breakpoint */
+    .thumbnail:hover .thumbnail-logo {
+        opacity: 1; /* Keep the logo visible */
+    }
+
+    .thumbnail:hover .thumbnail-videos {
+        opacity: 0; /* Keep videos hidden */
+        visibility: hidden;
+    }
+
+    .overlay {
+        display: none;
+    }
+
+    .thumbnail:hover .mockup-video.front,
+    .thumbnail:hover .mockup-video.left,
+    .thumbnail:hover .mockup-video.right {
+        animation: none !important; /* Disable animations */
+    }
+}
+
+
+/*-------------------------------- Next Project --------------------------------*/
+
+.next-project {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    align-items: stretch; /* Ensure both columns are the same height */
+    border-top: 1px solid var(--color-off-white);
+    padding: 80px 0;
+}
+
+.next-project .thumbnail {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 2; /* Makes them squares */
+}
+
+.next-project .thumbnail-logo {
+    max-width: 33%;
+}
+
+.next-project .project-details {
+    flex: 1 1 calc(50% - 20px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Push title to top and role to bottom */
+}
+
+.next-project .project-description {
+    flex: 1 1 calc(50% - 20px);
+}
+
+.next-project h5 {
+    margin-top: 0px;
+}
+
+/* Project Description Styling */
+.next-project p {
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--color-dark-gray);
+    line-height: 2;
+    margin: 0;
+}
+
+.project-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+@media (max-width: 1024px) {
+    .next-project h1 {
+        font-size: 24px;
+    }
+
+    .next-project p {
+        font-size: 16px;
+        line-height: 1.4em;
+        padding-top: 8px;
+    }
+}
+
+@media (max-width: 768px) {
+    .next-project {
+        display: block;
+        flex-direction: column;
+        padding-bottom: 40px;
+    }
+
+    .next-project .thumbnail {
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .next-project {
+        display: block;
+        flex-direction: column;
+        padding-bottom: 20px;
+    }
+
+    .next-project h1 {
+        font-size: 24px;
+    }
+
+    .next-project p {
+        display: none;
+    }
+
+}
+
+/*-------------------------------- Footer --------------------------------*/
+
+/* Container to fill available height */
+footer .container {
+    height: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Flex column layout for footer */
+.footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    min-height: calc(100vh - 160px); /* Full viewport height minus padding */
+}
+
+/* Contact section fills available space */
+.contact {
+    flex-grow: 1; /* Fills all available space */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center vertically */
+    align-items: flex-start; /* Align content to the left */
+}
+
+/* Typography */
+.footer p {
+    font-size: 18px;
+    line-height: 2em;
+    font-weight: 200;
+    color: var(--color-medium-gray);
+    margin: 0;
+    max-width: 50%;
+}
+
+/* Email link */
+.footer h2 {
+    font-size: 24px;
+    font-weight: 200;
+    line-height: 1.4em;
+    color: var(--color-medium-gray);
+    margin: 20px 0 0;
+}
+
+.footer h2 a {
+    text-decoration: underline;
+    color: var(--color-white);
+    display: inline-block; /* Ensure transform works properly */
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.footer h2 a:hover {
+    transform: translateX(4px);
+}
+
+/* Copyright text at the bottom */
+.copyright {
+    text-align: center;
+    font-size: 16px;
+    color: var(--color-light-gray);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .footer p {
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .contact {
+        align-items: center;
+        text-align: center;
+    }
+}
+
