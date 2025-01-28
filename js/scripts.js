@@ -254,30 +254,4 @@ document.addEventListener('DOMContentLoaded', updateDescriptions);
 
 
 
-document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll('.thumbnail').forEach(thumbnail => {
-        const bg = thumbnail.dataset.bg;
-        if (bg) {
-            const img = new Image();
-            img.src = bg;
-            img.onload = () => {
-                thumbnail.style.backgroundImage = `url('${bg}')`;
-            };
-        }
-    });
-});
-
-const lazyVideos = document.querySelectorAll('video[muted][playsinline]');
-const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const video = entry.target;
-            video.load();
-            observer.unobserve(video);
-        }
-    });
-});
-lazyVideos.forEach(video => observer.observe(video));
-
-
 
