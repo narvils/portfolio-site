@@ -196,9 +196,18 @@
             </div>
         </footer>
 
-
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="js/scripts.js"></script>
-
+    <script>
+        AOS.init({
+            duration: 1000, // Animation duration in milliseconds
+            easing: 'cubic-bezier(0.12, 0.23, 0, 0.97)', // Custom easing function
+            once: true, // Animation runs only once
+            offset: 80, // Offset (in px) before the animation starts
+            delay: 100, // Delay before animation starts
+            disableMutationObserver: true,
+        });
+    </script>
 </body>
 
 </html>
