@@ -271,19 +271,3 @@ document.addEventListener("DOMContentLoaded", function () {
 
     animatedElements.forEach(element => observer.observe(element));
 });
-
-document.addEventListener("DOMContentLoaded", function () {
-    import('https://unpkg.com/photoswipe/dist/photoswipe-lightbox.esm.js')
-        .then(({ default: PhotoSwipeLightbox }) => {
-            const lightbox = new PhotoSwipeLightbox({
-                gallery: '#my-gallery',
-                children: 'a',
-                pswpModule: () => import('https://unpkg.com/photoswipe'),
-            });
-
-            lightbox.init();
-        });
-});
-
-
-
