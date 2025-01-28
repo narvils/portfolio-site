@@ -248,5 +248,27 @@ function updateDescriptions() {
     });
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+    const animatedElements = document.querySelectorAll(".animated");
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                if (entry.target.classList.contains("slide-up")) {
+                    entry.target.style.animation = "slideInUp 0.8s ease-out forwards";
+                } else if (entry.target.classList.contains("slide-left")) {
+                    entry.target.style.animation = "slideInLeft 0.8s ease-out forwards";
+                } else if (entry.target.classList.contains("slide-right")) {
+                    entry.target.style.animation = "slideInRight 0.8s ease-out forwards";
+                }
+
+                observer.unobserve(entry.target); // Only animate once
+            }
+        });
+    }, { threshold: 0.3 });
+
+    animatedElements.forEach(element => observer.observe(element));
+});
+
 
 
