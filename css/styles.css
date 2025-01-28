@@ -753,7 +753,6 @@ ul li {
 #my-gallery {
     position: relative;
     margin: 80px 0;
-    min-width: 100vh;
 }
 
 #my-gallery a {
