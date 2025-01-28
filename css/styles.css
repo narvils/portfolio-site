@@ -1238,3 +1238,20 @@ footer .container {
     transform: translateY(80px);
     transition: opacity 1s ease, transform 1s cubic-bezier(0.12, 0.23, 0, 0.97);
 }
+
+/* Gallery Thumbnails with Placeholders */
+.pswp-gallery a img {
+    display: block;
+    width: 100%; /* Ensures thumbnails are responsive */
+    height: auto;
+    background-color: var(--color-off-white); /* Placeholder color */
+    aspect-ratio: attr(data-pswp-width) / attr(data-pswp-height); /* Ensure consistent aspect ratio */
+    object-fit: cover;
+    opacity: 0; /* Start hidden */
+    transition: opacity 0.5s ease-in-out; /* Fade in when loaded */
+}
+
+/* Once images are loaded */
+.pswp-gallery a img.loaded {
+    opacity: 1; /* Make the image visible */
+}
