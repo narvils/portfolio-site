@@ -13,7 +13,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
 
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
@@ -40,22 +39,22 @@
 
                 <div class="project-grid services">
 
-                    <div class="half" data-aos="fade-right">
+                    <div class="half">
 
-                        <img src="George.webp" style="width: 180px; height: auto; border-radius: 500px;">
-                        <h1>I'm George, a product designer with over 10 years of experience in creating intuitive and impactful user experiences for mobile apps and digital products.</h1>
+                        <img src="George.webp" style="width: 180px; height: auto; border-radius: 500px;" class="animated slide-right">
+                        <h1 class="animated slide-right">I'm George, a product designer with over 10 years of experience in creating intuitive and impactful user experiences for mobile apps and digital products.</h1>
 
                         <div class="full-width spacer"></div>
 
                         <h4>Services</h4>
                         <div class="services-list">
-                            <ul>
+                            <ul class="animated slide-right">
                                 <li>UX design</li>
                                 <li>Interface design</li>
                                 <li>Interaction design</li>
                                 <li>Visual design</li>
                             </ul>
-                            <ul>
+                            <ul class="animated slide-right" data-delay="100">
                                 <li>Motion Design</li>
                                 <li>Prototyping</li>
                                 <li>Product strategy</li>
@@ -72,19 +71,16 @@
         <div class="container">
             <div class="footer">
                 <div class="contact">
-                    <p data-aos="fade-up">Product designer specializing in creating intuitive and impactful user experiences for mobile apps and digital products.</p>
-                    <h2 data-aos="fade-up" data-aos-delay="200"><a href="mailto:hi@georgewill.design">hi@georgewill.design</a></h2>
+                    <p class="animated slide-up">Product designer specializing in creating intuitive and impactful user experiences for mobile apps and digital products.</p>
+                    <h2 class="animated slide-up" data-delay="200"><a href="mailto:hi@georgewill.me">hi@georgewill.me</a></h2>
                 </div>
-                <p data-aos="fade-in">&copy; 2025 George Will</p>
+                <p>&copy; 2025 George Will</p>
             </div>
         </div>
     </footer>
 
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script src="js/scripts.js"></script>
-    <script>
-        AOS.init();
-    </script>
+<script src="../js/scripts.js"></script>
+
 </body>
 
 </html>
