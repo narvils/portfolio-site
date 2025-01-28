@@ -17,8 +17,6 @@
     <link rel="preload" href="2.webp" as="image" type="image/webp">
 
     <link rel="stylesheet" href="../../css/styles.css">
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="https://unpkg.com/photoswipe/dist/photoswipe-lightbox.esm.js"></script>
 
     <link rel="stylesheet" href="https://unpkg.com/photoswipe@5.2.2/dist/photoswipe.css">
@@ -43,14 +41,14 @@
 
         <div class="project-info">
             <div class="container">
-                <div class="project-details" data-aos="fade-right">
+                <div class="project-details">
 
                     <div class="project-title">
                         <h1>Gallery</h1>
                     </div>
 
                 </div>
-                <div class="project-description" data-aos="fade-right" data-aos-delay="100">
+                <div class="project-description">
                     <p>A collection of various past work I've done over the years</p>
                 </div>
             </div>
@@ -60,7 +58,7 @@
 
             <div class="container">
 
-                <div class="pswp-gallery" id="my-gallery" data-aos="fade-up" data-aos-duration="1000">
+                <div class="pswp-gallery" id="my-gallery">
                     <a href="1.webp" data-pswp-width="2000" data-pswp-height="2000" target="_blank">
                         <img src="1.webp" alt="" />
                     </a>
@@ -143,25 +141,15 @@
             <div class="container">
                 <div class="footer">
                     <div class="contact">
-                        <p data-aos="fade-up">Product designer specializing in creating intuitive and impactful user experiences for mobile apps and digital products.</p>
-                        <h2 data-aos="fade-up" data-aos-delay="200"><a href="mailto:hi@georgewill.design">hi@georgewill.design</a></h2>
+                        <p>Product designer specializing in creating intuitive and impactful user experiences for mobile apps and digital products.</p>
+                        <h2><a href="mailto:hi@georgewill.design">hi@georgewill.design</a></h2>
                     </div>
-                    <p data-aos="fade-in">&copy; 2025 George Will</p>
+                    <p>&copy; 2025 George Will</p>
                 </div>
             </div>
         </footer>
 
     <script src="../../js/scripts.js"></script>
-    <script>
-        AOS.init({
-            duration: 500, // Animation duration in milliseconds
-            easing: 'cubic-bezier(0.12, 0.23, 0, 0.97)', // Custom easing function
-            once: true, // Animation runs only once
-            offset: 80, // Offset (in px) before the animation starts
-            delay: 0, // Delay before animation starts
-            startEvent: 'DOMContentLoaded',
-        });
-    </script>
     <script type="module">
         import PhotoSwipeLightbox from 'https://unpkg.com/photoswipe/dist/photoswipe-lightbox.esm.js';
     
