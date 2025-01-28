@@ -253,3 +253,15 @@ window.addEventListener('resize', updateDescriptions);
 document.addEventListener('DOMContentLoaded', updateDescriptions);
 
 
+
+const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+const observer = new IntersectionObserver((entries, obs) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const img = entry.target;
+      img.src = img.dataset.src; // Replace src with the real source
+      obs.unobserve(img);
+    }
+  });
+});
+lazyImages.forEach(img => observer.observe(img));
