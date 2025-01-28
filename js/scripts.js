@@ -248,34 +248,5 @@ function updateDescriptions() {
     });
 }
 
-// Run the function on load and resize
-window.addEventListener('resize', updateDescriptions);
-document.addEventListener('DOMContentLoaded', updateDescriptions);
-
-document.addEventListener("DOMContentLoaded", function () {
-    const portfolioGrid = document.querySelector(".portfolio-grid");
-    const videos = document.querySelectorAll(".lazy-video");
-
-    // Observer to detect when the portfolio grid becomes visible
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // Load videos only when portfolio grid is fully visible
-                videos.forEach(video => {
-                    const src = video.getAttribute("data-src");
-                    if (src) {
-                        video.setAttribute("src", src);
-                        video.load(); // Start loading the video
-                    }
-                });
-
-                // Stop observing after loading videos
-                observer.disconnect();
-            }
-        });
-    }, { threshold: 0.3 });
-
-    observer.observe(portfolioGrid);
-});
 
 
