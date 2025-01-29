@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
     placeholder.style.display = "none";
     header.parentNode.insertBefore(placeholder, header); // Place it before header
 
-    const stickyThreshold = 40;
+    const stickyThreshold = 60;
 
     window.addEventListener("scroll", () => {
         if (window.scrollY > stickyThreshold) {
@@ -270,4 +270,18 @@ document.addEventListener("DOMContentLoaded", function () {
     }, { threshold: 0.15 });
 
     animatedElements.forEach(element => observer.observe(element));
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    function loadComponent(elementId, filePath) {
+        fetch(filePath)
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById(elementId).innerHTML = data;
+            })
+            .catch(error => console.error(`Error loading ${filePath}:`, error));
+    }
+
+    loadComponent("header", "/components/header.html");
+    loadComponent("footer", "/components/footer.html");
 });

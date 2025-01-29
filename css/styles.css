@@ -7,7 +7,10 @@
     --color-white: #FFFFFF;
     --font-family: 'Outfit', sans-serif;
     --transition-default: 0.3s ease-in-out;
-    --padding-container: 0 80px;
+    --padding-XL: 80px;
+    --padding-L: 40px;
+    --padding-M: 20px;
+    --padding-S: 10px;
 }
 
 body {
@@ -40,13 +43,13 @@ img, video {
 .container {
     max-width: 1400px;
     margin: 0 auto;  /* Centers the content */
-    padding: 0 80px; /* Adds spacing on smaller screens */
+    padding: 0 var(--padding-XL); /* Adds spacing on smaller screens */
 }
 
 header {
     position: relative;
     width: 100%;
-    padding: 60px 0;
+    padding: var(--padding-XL) 0;
     background: var(--color-white);
 }
 
@@ -55,7 +58,7 @@ header.sticky {
     top: 0;
     left: 0;
     right: 0;
-    padding: 20px 0;  /* Reduced padding */
+    padding: var(--padding-M) 0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
     z-index: 1000;
 }
