@@ -271,17 +271,3 @@ document.addEventListener("DOMContentLoaded", function () {
 
     animatedElements.forEach(element => observer.observe(element));
 });
-
-document.addEventListener("DOMContentLoaded", function () {
-    function loadComponent(elementId, filePath) {
-        fetch(filePath)
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById(elementId).innerHTML = data;
-            })
-            .catch(error => console.error(`Error loading ${filePath}:`, error));
-    }
-
-    loadComponent("header", "/components/header.html");
-    loadComponent("footer", "/components/footer.html");
-});
