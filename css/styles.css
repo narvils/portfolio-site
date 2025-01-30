@@ -13,6 +13,11 @@
     --padding-S: 10px;
 }
 
+a:active,
+a:hover {
+    touch-action: manipulation;
+}
+
 body {
     font-family: var(--font-family);
     color: var(--color-black);
@@ -414,12 +419,11 @@ ul li {
 }
 
 .services {
-    align-items: flex-start;
+    align-items: center;
 }
 
 .services h1 {
     font-weight: 200;
-    margin-top: 60px;
 }
 
 .services ul li, .services p {
@@ -436,8 +440,9 @@ ul li {
 
 .services-list {
     display: flex;
-    gap: 40px; /* Space between columns */
+    gap: var(--padding-M); /* Space between columns */
     flex-wrap: wrap;
+    padding-bottom: var(--padding-XL);
 }
 
 /* Project Description Styling */
@@ -469,6 +474,14 @@ ul li {
 
     .project-role ul li {
         margin-bottom: 0; /* Remove bottom margin for single row layout */
+    }
+}
+
+@media (max-width: 480px) {
+    .services-list {
+        flex-direction: column;
+        gap: 0;
+        padding-bottom: var(--padding-M);
     }
 }
 
@@ -644,6 +657,12 @@ ul li {
     .project-grid {
         padding: 20px 0;
     }
+}
+
+@media (max-width: 480px) {
+    .project-grid .text-section h1 {font-size: 24px;}
+    .project-grid .text-section h2 {font-size: 18px;}
+    .project-grid .text-section p {margin: 0;}
 }
 
 .bb-video-wrap {
@@ -1155,6 +1174,11 @@ footer .container {
     color: var(--color-medium-gray);
     margin: 0;
     max-width: 50%;
+}
+
+.footer h3 {
+    font-weight: 200;
+    color: var(--color-medium-gray);
 }
 
 /* Email link */
