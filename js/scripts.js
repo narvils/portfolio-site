@@ -149,7 +149,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-
 // Initialize masonry layout
 function initMasonry() {
     const galleryContainer = document.getElementById('my-gallery');
