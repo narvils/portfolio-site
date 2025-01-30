@@ -120,6 +120,36 @@ function masonryLayout(container, items, columns, gap) {
     container.style.height = `${Math.max(...columnHeights)}px`;
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+    const galleryContainer = document.getElementById("my-gallery");
+    const images = galleryContainer.querySelectorAll(".gallery-image");
+    const skeletons = galleryContainer.querySelectorAll(".gallery-skeleton");
+
+    let imagesLoaded = 0;
+
+    images.forEach(img => {
+        img.addEventListener("load", function () {
+            img.classList.add("loaded"); // Fade in image
+
+            imagesLoaded++;
+            if (imagesLoaded === images.length) {
+                // Remove skeletons when all images are loaded
+                skeletons.forEach(skeleton => skeleton.remove());
+
+                // Initialize Masonry Layout
+                initMasonry();
+            }
+        });
+
+        // If image is already loaded from cache
+        if (img.complete) {
+            img.classList.add("loaded");
+            imagesLoaded++;
+        }
+    });
+});
+
+
 // Initialize masonry layout
 function initMasonry() {
     const galleryContainer = document.getElementById('my-gallery');
