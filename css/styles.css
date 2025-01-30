@@ -1157,7 +1157,11 @@ ul li {
     .next-project {
         display: block;
         flex-direction: column;
-        padding-bottom: 20px;
+        padding: 20px 0;
+    }
+
+    .next-project h5 {
+        margin-bottom: 10px;
     }
 
     .next-project h1 {
