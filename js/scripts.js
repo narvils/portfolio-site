@@ -130,6 +130,8 @@ document.addEventListener("DOMContentLoaded", function () {
     images.forEach(img => {
         img.addEventListener("load", function () {
             img.classList.add("loaded"); // Fade in image
+            img.classList.add("animated");
+            img.classList.add("slide-up");
 
             imagesLoaded++;
             if (imagesLoaded === images.length) {
