@@ -177,15 +177,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const columns = document.querySelectorAll(".vertical-carousel-track");
 
     columns.forEach(column => {
-        duplicateContent(column); // Duplicate the content to enable seamless scrolling
-        startInfiniteScroll(column, getScrollSpeed(column)); // Start scrolling
+        setupInfiniteScroll(column, getScrollSpeed(column)); // Start scrolling
     });
-
-    // Function to duplicate content for seamless looping
-    function duplicateContent(column) {
-        const content = column.innerHTML;
-        column.innerHTML += content; // Duplicate the column's content
-    }
 
     // Function to determine the scroll speed based on column class
     function getScrollSpeed(column) {
@@ -195,30 +188,29 @@ document.addEventListener("DOMContentLoaded", function () {
         return 1; // Default speed
     }
 
-    // Function to create infinite vertical scroll
-    function startInfiniteScroll(column, speed) {
-        let scrollPosition = 0; // Track the scroll position
-        const totalHeight = column.scrollHeight / 2; // Original content height
+    function setupInfiniteScroll(column, speed) {
+        const content = column.innerHTML;
+        column.innerHTML += content; // Duplicate content once
+
+        let scrollPosition = 0;
+        const totalHeight = column.scrollHeight / 2; // Half content height
 
         function scroll() {
-            scrollPosition += speed; // Increment scroll position
+            scrollPosition += speed;
+            column.style.transform = `translateY(-${scrollPosition}px)`;
 
-            // Seamlessly reset the scroll position without snapping
+            // If scrolled past one full loop, reset invisibly
             if (scrollPosition >= totalHeight) {
-                scrollPosition = 0; // Reset to the start
-                column.style.transform = `translateY(0)`; // Instantly reset
-            } else {
-                column.style.transform = `translateY(-${scrollPosition}px)`; // Scroll up
+                scrollPosition = 0; // Reset back to start
+                column.style.transform = `translateY(0)`;
             }
 
-            requestAnimationFrame(scroll); // Continue scrolling
+            requestAnimationFrame(scroll);
         }
 
-        scroll(); // Start the scroll loop
+        scroll(); // Start the loop
     }
 });
-
-
 
 
 document.addEventListener("DOMContentLoaded", function () {
